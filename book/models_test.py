@@ -132,5 +132,23 @@ BookInfo.objects.filter(peopleinfo__name__contains='郭')
 PeopleInfo.objects.filter(book__name__contains='射')
 
 
+# ##################################################QuerySet惰性执行-缓存
+# 创建查询集不会访问数据库，直到调用数据时，才会访问数据库，调用数据的情况包括迭代、序列化、与if合用
+books = BookInfo.objects.all()
+for book in books:#从硬盘拿数据
+    print(book.name)
+list = [book.id for book in books] #从内存拿数据
+
+
+# ##################################################分页Paginator
+from django.core.paginator import Paginator
+
+#把QuerySet分成两页产生Paginator对象
+paginator: Paginator = Paginator(books,2)
+#获取第一页的Page对象
+page = paginator.page(1)
+#获取page对象从paginator.page方法中得到的QuerySet列表
+plist: list[BookInfo] = page.object_list
+
 
 

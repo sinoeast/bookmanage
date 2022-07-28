@@ -11,5 +11,8 @@ from django.urls import path
 from book import views
 
 urlpatterns = [
-    path('<int:i>', views.xx)
+    #name 用于反向解析路由
+    path('', views.putong,name='xx'),
+    path('<int:id>/<str:name>/', views.lujing,name='zz'),
+    path('get/', views.get,name='get'),
 ]

@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('book/', include('book.urls'))
+    # namespace 用于反向解析路由
+    path('book/', include(('book.urls', 'book'), namespace='book'))
 ]
