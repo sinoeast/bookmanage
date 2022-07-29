@@ -11,8 +11,10 @@ from django.urls import path
 from book import views
 
 urlpatterns = [
-    #name 用于反向解析路由
-    path('', views.putong,name='xx'),
-    path('<int:id>/<str:name>/', views.lujing,name='zz'),
-    path('get/', views.get,name='get'),
+    # name 用于反向解析路由
+    path('', views.gengmulu, name='xx'),
+    path('<int:id>/<str:name>/', views.jiexiluyou, name='zz'),
+    path('get/', views.get, name='get'),
+    path('post/', views.post, name='post'),
+    path('set_cookie', views.set_cookie, name='set_cookie'),
 ]
