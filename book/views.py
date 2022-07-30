@@ -7,6 +7,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 #
+from django.views import View
+
+
 def gengmulu(req):
     #namespace:name 通过别名反向解析路由
     rout = reverse('book:xx')
@@ -75,7 +78,53 @@ def set_cookie(req):
     req_body = req.body
     dict_req = json.loads(req_body)
     name = dict_req.get('name')
+    #设置cookie
     response = HttpResponse('setcookie')
     response.set_cookie('name',name)
-
     return response
+
+
+
+#得到cookie
+def get_cookie(req):
+    cookie = req.COOKIES
+    print(cookie)
+    return HttpResponse('getcookie')
+
+def set_session(request):
+    req_body = request.body
+    dict_req = json.loads(req_body)
+    name = dict_req.get('name')
+    #设置session
+    print(name)
+    request.session['name'] = name
+    return HttpResponse('set_session')
+
+#得到session
+def get_session(request):
+    name = request.session['name']
+    print(name)
+    return HttpResponse('getsession')
+
+
+
+def m(func):
+    def wapper1(*args,**kwargs):
+        print("使用了装饰器")
+        re = func(*args, **kwargs)
+        print("使用了装饰器1")
+        return re
+    return wapper1
+
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+class Classview(View):
+
+    @m
+    def get(self,request):
+        return HttpResponse('这是get请求')
+
+    def post(self,request):
+        return HttpResponse('这是post请求')
+
+

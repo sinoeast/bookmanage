@@ -46,6 +46,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'book.MIDDLEWARE.MIDDLEWARE',
 ]
 
 ROOT_URLCONF = 'bookmanage.urls'
@@ -79,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': "book",
         'USER': "root",
-        'PASSWORD': "root",
+        'PASSWORD': "123456",
         'HOST': '127.0.0.1'
     }
 }
